@@ -1,33 +1,36 @@
 #include <hw01.h>
 
-int hw01(int start, int end)
-{
-  if (start < 10 || start > 99 || end < 10 || end > 99 || start > end) {
+int calculateDigitSum(int num) {
+  int digitSum = 0;
+  while (num > 0) {
+    digitSum += num % 10;
+    num /= 10;
+  }
+  return digitSum;
+}
+
+bool isNumberPrime(int num) {
+  if (num < 2) return false;
+  for (int divisor = 2; divisor * divisor <= num; ++divisor) {
+    if (num % divisor == 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+int hw01(int low, int high) {
+  if (low < 10 || low > 99 || high < 10 || high > 99 || low > high) {
     return -1;
   }
 
-  int totalSum = 0;
-  // Ищем простые числа в диапазоне и считаем сумму их цифр
-  for (int i = start; i <= end; ++i) {
-    bool isPrime = true;
-    if (i < 2) isPrime = false;
-    for (int j = 2; j * j <= i; ++j) {
-      if (i % j == 0) {
-        isPrime = false;
-        break;
-      }
-    }
+  int primeDigitSum = 0;
 
-    if (isPrime) {
-      int sum = 0;
-      int number = i;
-      while (number > 0) {
-        sum += number % 10;
-        number /= 10;
-      }
-      totalSum += sum;
+  for (int currentNum = low; currentNum <= high; ++currentNum) {
+    if (isNumberPrime(currentNum)) {
+      primeDigitSum += calculateDigitSum(currentNum);
     }
   }
 
-  return totalSum;
+  return primeDigitSum;
 }
