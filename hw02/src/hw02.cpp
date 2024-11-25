@@ -2,6 +2,13 @@
 
 std::string hw02(std::string input_str)
 {
-    // Write code here..
-    return input_str;
+
+  std::string result;
+  for (char c : input_str) {
+    if (result.find(c) == std::string::npos) {
+      result += c;
+    }
+  }
+
+  return result;
 }
