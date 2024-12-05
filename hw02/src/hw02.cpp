@@ -10,5 +10,5 @@ std::string hw02(std::string input_str)
     }
   }
 
-  return result;
+  return result; 
 }
